@@ -402,8 +402,7 @@ agent.updateConversationField({
 });
 ```
 
-If the conversation has an assigned agent which needs to be removed, this **must** be done as a part of the same request.
->Note: Attempting to remove the assigned agent when there is none will cause the request to fail.
+If the conversation has an assigned agent that needs to be removed, this can be done within the same request by providing the user ID of the agent to be removed.
 ```javascript
 agent.updateConversationField({
 'conversationId': 'conversationId/dialogId',
@@ -411,7 +410,8 @@ agent.updateConversationField({
         {
             'field': 'ParticipantsChange',
             'type': 'REMOVE',
-            'role': 'ASSIGNED_AGENT'
+            'role': 'ASSIGNED_AGENT',
+            'userId': assignedAgentUserId, // id is in the format of `brandId.agentId`
         },
         {
             'field': 'Skill',
